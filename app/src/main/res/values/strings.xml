@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LetsPrint</string>
+	<string name="view_from_storage">View From Storage</string>
+	<string name="about">About</string>
+	<string name="bt_settings">Settings</string>
+	<string name="view_from_assets">View From Assets</string>
+	<string name="print">Print</string>
+</resources>
