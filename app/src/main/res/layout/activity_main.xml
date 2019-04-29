@@ -6,26 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-<android.support.v7.widget.ActionMenuView
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-	<android.support.design.widget.TabItem
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/bt_settings" android:accessibilityPaneTitle="Settings"/>
-	<android.support.design.widget.TabItem
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:id="@+id/about" android:accessibilityPaneTitle="About"/>
-
-
-</android.support.v7.widget.ActionMenuView>
     <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:layout_centerInParent="true">
 
 		<Button
 				android:id="@+id/btn_view_assets"
 				android:layout_width="166dp"
 				android:layout_height="wrap_content"
-				android:text="View From Assets"/>
-        <Button android:id="@+id/btn_view_storage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View From Storage"/>
+				android:text="@string/view_from_assets"/>
+        <Button android:id="@+id/btn_view_storage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/view_from_storage"/>
     </LinearLayout>
 
 </RelativeLayout>

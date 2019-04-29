@@ -12,9 +12,12 @@
 			android:layout_width="match_parent"
 	   		android:layout_height="match_parent">
 
-			<Button
+			<Button	android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/print_btn" android:layout_alignParentEnd="true" android:layout_alignParentBottom="true" android:layout_margin="50dp" android:text="@string/print"/>
+			<TextView android:text="@string/attach_printer"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" android:id="@+id/print_btn" android:layout_alignParentEnd="true" android:layout_alignParentBottom="true" android:layout_margin="50dp" android:text="Print"/>
+					android:layout_height="56dp" android:id="@+id/printer_name" android:layout_alignBottom="@id/print_btn" android:layout_alignParentStart="true"/>
+
 		</com.github.barteksc.pdfviewer.PDFView>
 
 
