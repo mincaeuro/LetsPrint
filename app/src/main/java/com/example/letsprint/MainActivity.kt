@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings.ACTION_BLUETOOTH_SETTINGS
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -28,11 +29,13 @@ class MainActivity : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.about_link -> {
-                Toast.makeText(this@MainActivity, "Hi my name is..", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this@MainActivity, "Hi my name is..", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@MainActivity, AboutActivity::class.java))
                 true
             }
             R.id.settings_link -> {
-                Toast.makeText(this@MainActivity, "Lets mess with your phone settings", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(ACTION_BLUETOOTH_SETTINGS))
+                //Toast.makeText(this@MainActivity, "Lets mess with your phone settings", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.exit_link -> {
@@ -46,7 +49,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val PICK_PDF_CODE = 1000
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +80,10 @@ class MainActivity : AppCompatActivity() {
             pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
             startActivityForResult(Intent.createChooser(pdfIntent,"Select PDF"), PICK_PDF_CODE)
         }
-
+     /**   if BluetoothAdapter.STATE_ON = true {
+            bt_name.text = BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED
+        }
+     **/
 
     }
 

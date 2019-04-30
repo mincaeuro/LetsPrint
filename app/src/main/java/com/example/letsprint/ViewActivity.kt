@@ -17,8 +17,11 @@ class ViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setSupportActionBar(mainToolBar)
 
+        val actionbar = supportActionBar
+        actionbar!!.title = "PDF File"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        
         setContentView(R.layout.activity_view)
         if (intent !=null){
             val viewType = intent.getStringExtra("ViewType")
@@ -32,7 +35,7 @@ class ViewActivity : AppCompatActivity() {
                         .enableSwipe(true)
                         .swipeHorizontal(false)
                         .enableDoubletap(true)
-                       /* .onDraw{canvas, pageWidth, pageHeight, displayedPage ->
+                       /** .onDraw{canvas, pageWidth, pageHeight, displayedPage ->
                             // Enter code here
                         }
                         .onDrawAll{canvas, pageWidth, pageHeight, displayedPage ->
@@ -40,7 +43,7 @@ class ViewActivity : AppCompatActivity() {
                         }
                         .onPageChange { page, pageCount ->
                             // enter ur code here
-                        } */
+                        } **/
                         .onPageError { page, t ->
                             Toast.makeText(this@ViewActivity, "Error while opening page$page",Toast.LENGTH_SHORT).show()
                             Log.d("ERROR",""+t.localizedMessage)
@@ -56,7 +59,7 @@ class ViewActivity : AppCompatActivity() {
                 else if (viewType == "storage")
                 {
                     val selectedPdf = Uri.parse(intent.getStringExtra("FileUri"))
-
+                    actionbar.title = selectedPdf.toString()
                     pdf_view.fromUri(selectedPdf)
                         // Toast.makeText(this@ViewActivity, "Loading file..",Toast.LENGTH_SHORT)
                         .password("null")// if pass needed
@@ -64,7 +67,7 @@ class ViewActivity : AppCompatActivity() {
                         .enableSwipe(true)
                         .swipeHorizontal(false)
                         .enableDoubletap(true)
-                       /* .onDraw{canvas, pageWidth, pageHeight, displayedPage ->
+                       /** .onDraw{canvas, pageWidth, pageHeight, displayedPage ->
                             // Enter code here
                         }.onDrawAll{canvas, pageWidth, pageHeight, displayedPage ->
                             // Enter code here
@@ -73,7 +76,7 @@ class ViewActivity : AppCompatActivity() {
                             // enter ur code here
 
                         }
-                        */
+                        **/
                         .onPageError { page, t ->
                             Toast.makeText(this@ViewActivity, "Error while opening page$page",Toast.LENGTH_SHORT).show()
                             Log.d("ERROR",""+t.localizedMessage)
@@ -96,6 +99,11 @@ class ViewActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 

@@ -3,7 +3,6 @@
           package="com.example.letsprint">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -16,6 +15,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".AboutActivity">
+        </activity>
         <activity android:name=".ViewActivity">
         </activity>
         <activity android:name=".MainActivity">
