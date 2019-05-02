@@ -17,6 +17,11 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
+import android.bluetooth.BluetoothDevice
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,18 +61,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Dexter.withActivity(this)
-            .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            .withListener(object:BaseMultiplePermissionsListener(){
-                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                    super.onPermissionsChecked(report)
-                }
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: MutableList<PermissionRequest>?,
-                    token: PermissionToken?
-                ) {
-                    super.onPermissionRationaleShouldBeShown(permissions, token)
-                }
-                })
+            .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .withListener(object : BaseMultiplePermissionsListener() {
+
+            })
 
         btn_view_assets.setOnClickListener {
             val intent = Intent(this@MainActivity, ViewActivity::class.java)
@@ -78,17 +75,11 @@ class MainActivity : AppCompatActivity() {
             val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
             pdfIntent.type = "application/pdf"
             pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
-            startActivityForResult(Intent.createChooser(pdfIntent,"Select PDF"), PICK_PDF_CODE)
+            startActivityForResult(Intent.createChooser(pdfIntent, "Select PDF"), PICK_PDF_CODE)
         }
-     /**   if BluetoothAdapter.STATE_ON = true {
-            bt_name.text = BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED
-        }
-     **/
 
     }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == PICK_PDF_CODE && resultCode == Activity.RESULT_OK && data != null)
         {

@@ -14,6 +14,8 @@
 			android:text="@string/about_me"
 			android:layout_centerHorizontal="true"
 			android:layout_centerVertical="true"
+			android:autoLink="email"
+			android:clickable="true"
 			/>
 
 </RelativeLayout>
