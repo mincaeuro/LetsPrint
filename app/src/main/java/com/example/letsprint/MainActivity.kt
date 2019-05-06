@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.exit_link -> {
                 Toast.makeText(this@MainActivity, "I'm done here", Toast.LENGTH_SHORT).show()
+                //exit
                 exitProcess(-1 )
             }
             else -> super.onOptionsItemSelected(item)

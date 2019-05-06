@@ -19,7 +19,7 @@ class ViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val actionbar = supportActionBar
-        actionbar!!.title = "PDF File"
+        actionbar!!.title = getString(R.string.PDF_title_bar)
         actionbar.setDisplayHomeAsUpEnabled(true)
         
         setContentView(R.layout.activity_view)
@@ -35,15 +35,6 @@ class ViewActivity : AppCompatActivity() {
                         .enableSwipe(true)
                         .swipeHorizontal(false)
                         .enableDoubletap(true)
-                       /** .onDraw{canvas, pageWidth, pageHeight, displayedPage ->
-                            // Enter code here
-                        }
-                        .onDrawAll{canvas, pageWidth, pageHeight, displayedPage ->
-                            // Enter code here
-                        }
-                        .onPageChange { page, pageCount ->
-                            // enter ur code here
-                        } **/
                         .onPageError { page, t ->
                             Toast.makeText(this@ViewActivity, "Error while opening page$page",Toast.LENGTH_SHORT).show()
                             Log.d("ERROR",""+t.localizedMessage)
@@ -67,16 +58,6 @@ class ViewActivity : AppCompatActivity() {
                         .enableSwipe(true)
                         .swipeHorizontal(false)
                         .enableDoubletap(true)
-                       /** .onDraw{canvas, pageWidth, pageHeight, displayedPage ->
-                            // Enter code here
-                        }.onDrawAll{canvas, pageWidth, pageHeight, displayedPage ->
-                            // Enter code here
-                        }
-                        .onPageChange { page, pageCount ->
-                            // enter ur code here
-
-                        }
-                        **/
                         .onPageError { page, t ->
                             Toast.makeText(this@ViewActivity, "Error while opening page$page",Toast.LENGTH_SHORT).show()
                             Log.d("ERROR",""+t.localizedMessage)

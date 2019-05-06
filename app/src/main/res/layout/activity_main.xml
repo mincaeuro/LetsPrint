@@ -16,7 +16,8 @@
         <Button android:id="@+id/btn_view_storage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/view_from_storage"/>
 		<android.support.v7.widget.AppCompatTextView
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:id="@+id/bt_name" android:text="@string/no_bt_device_connected"/>
+				android:layout_height="wrap_content" android:id="@+id/bt_name" android:text="@string/no_bt_device_connected"
+				/>
     </LinearLayout>
 
 </RelativeLayout>
