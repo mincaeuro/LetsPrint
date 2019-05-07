@@ -13,6 +13,7 @@ import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
+import android.bluetooth.BluetoothAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.settings_link -> {
                 startActivity(Intent(ACTION_BLUETOOTH_SETTINGS))
-                //Toast.makeText(this@MainActivity, "Lets mess with your phone settings", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Lets mess with your phone settings", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.exit_link -> {
@@ -52,6 +53,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //check if BT adapter is ON
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        val requestEnableBT = 1
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this@MainActivity, "Device does not support Bluetooth",Toast.LENGTH_SHORT).show()
+            // bt_name.text = "Device does not support Bluetooth"
+        } else {
+            if (!mBluetoothAdapter.isEnabled) {
+                Toast.makeText(this@MainActivity, "Bluetooth is not enabled, enabling...",Toast.LENGTH_SHORT).show()
+                val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                startActivityForResult(enableBluetoothIntent, requestEnableBT)
+            }
+        }
+        // end of BT check
 
         Dexter.withActivity(this)
             .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
