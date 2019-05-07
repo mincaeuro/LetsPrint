@@ -2,7 +2,6 @@ package com.example.letsprint
 
 import android.Manifest
 import android.app.Activity
-import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,16 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
-import android.bluetooth.BluetoothDevice
-import android.content.BroadcastReceiver
-import android.content.IntentFilter
-
 
 
 class MainActivity : AppCompatActivity() {
