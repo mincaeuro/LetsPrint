@@ -5,8 +5,7 @@
 	<string name="exit">Exit</string>
 	<string name="print">Print</string>
 	<string name="attach_printer">Attach Printer</string>
-	<string name="view_from_assets">View From Assets</string>
-	<string name="view_from_storage">View From Storage</string>
+	<string name="view_from_storage">Open PDF File</string>
 	<string name="no_bt_device_connected">no BT device connected</string>
 	<string name="about_me">Hi, here you can see some info about the DEV, mail: <a href="mailto:info@minirobota.sk?subject=Letsprint_about">info@minirobota.sk</a></string>
 	<string name="refresh">Refresh</string>

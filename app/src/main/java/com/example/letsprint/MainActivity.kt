@@ -14,6 +14,14 @@ import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
+import android.util.Log
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.mainmenuitems, menu)
         return true
     }
-
+//top menu items functions
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when (item.itemId) {
@@ -44,19 +52,24 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+//end of top menu items functions
 
     companion object {
         private val PICK_PDF_CODE = 1000
+        val EXTRA_ADDRESS: String = "Device_address"
     }
 
+    //bt dev objects
+    val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+    val requestEnableBT = 1
+    lateinit var mPairedDevice: Set<BluetoothDevice>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //check if BT adapter is ON
-        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        val requestEnableBT = 1
+
         if (mBluetoothAdapter == null) {
             Toast.makeText(this@MainActivity, "Device does not support Bluetooth",Toast.LENGTH_SHORT).show()
             // bt_name.text = "Device does not support Bluetooth"
@@ -65,21 +78,46 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Bluetooth is not enabled, enabling...",Toast.LENGTH_SHORT).show()
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(enableBluetoothIntent, requestEnableBT)
+
             }
+
+           // refresh_btn.setOnClickListener{pairedDeviceList()}
         }
         // end of BT check
 
+/*        private fun pairedDeviceList(){
+               mPairedDevice = mBluetoothAdapter!!.bondedDevices
+               val list:ArrayList<BluetoothDevice> = ArrayList()
+
+               if (!mPairedDevice.isEmpty()){
+                   for (device:BluetoothDevice in mPairedDevice){
+                       list.add(device)
+                       Log.i("device", ""+device)
+                   }
+               }else{
+                   Toast.makeText(this@MainActivity, "No paired devices found",Toast.LENGTH_SHORT).show()
+               }
+
+               val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
+               devices_list.adapter = adapter
+               devices_list.onItemClickListener = AdapterView.OnItemClickListener{_, _, position, _ ->
+                   val device: BluetoothDevice = list[position]
+                   val address: String = device.address
+
+                   val intent = Intent(this, ControlActivity::class.java)
+                   intent.putExtra(EXTRA_ADDRESS, address)
+                   startActivity(intent)
+               }
+           }
+        */
+
+// open pdf from storage fun
         Dexter.withActivity(this)
             .withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             .withListener(object : BaseMultiplePermissionsListener() {
 
             })
-
-        btn_view_assets.setOnClickListener {
-            val intent = Intent(this@MainActivity, ViewActivity::class.java)
-            intent.putExtra("ViewType", "assets")
-            startActivity(intent)
-        }
+//btn action
         btn_view_storage.setOnClickListener {
             val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
             pdfIntent.type = "application/pdf"
@@ -88,8 +126,11 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+//pdf open action
         if(requestCode == PICK_PDF_CODE && resultCode == Activity.RESULT_OK && data != null)
         {
             val selectedPDF = data.data
@@ -98,7 +139,18 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("FileUri", selectedPDF.toString())
             startActivity(intent)
         }
-
+//bt shit
+      if(requestCode == requestEnableBT){
+            if(resultCode == Activity.RESULT_OK){
+                if (!mBluetoothAdapter.isEnabled) {
+                    Toast.makeText(this@MainActivity, "BT was enabled",Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@MainActivity, "BT was disabled",Toast.LENGTH_SHORT).show()
+                }
+            }else if(resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(this@MainActivity, "BT enabling has been canceled",Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 }
