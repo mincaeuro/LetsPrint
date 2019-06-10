@@ -7,6 +7,8 @@
 	<string name="attach_printer">Attach Printer</string>
 	<string name="view_from_storage">Open PDF File</string>
 	<string name="no_bt_device_connected">no BT device connected</string>
+	<string name="bt_not_supported">BT is not supported on this device</string>
+	<string name="bt_disabled">BT is disabled</string>
 	<string name="about_me">Hi, here you can see some info about the DEV, mail: <a href="mailto:info@minirobota.sk?subject=Letsprint_about">info@minirobota.sk</a></string>
 	<string name="refresh">Refresh</string>
 	<string name="PDF_title_bar">PDF File</string>

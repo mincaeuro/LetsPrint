@@ -24,6 +24,9 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 
 
+
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -72,7 +75,8 @@ class MainActivity : AppCompatActivity() {
 
         if (mBluetoothAdapter == null) {
             Toast.makeText(this@MainActivity, "Device does not support Bluetooth",Toast.LENGTH_SHORT).show()
-            // bt_name.text = "Device does not support Bluetooth"
+            val textView = findViewById<TextView>(R.id.bt_name)
+            textView.text = resources.getString(R.string.bt_not_supported)
         } else {
             if (!mBluetoothAdapter.isEnabled) {
                 Toast.makeText(this@MainActivity, "Bluetooth is not enabled, enabling...",Toast.LENGTH_SHORT).show()
@@ -144,11 +148,17 @@ class MainActivity : AppCompatActivity() {
             if(resultCode == Activity.RESULT_OK){
                 if (!mBluetoothAdapter.isEnabled) {
                     Toast.makeText(this@MainActivity, "BT was enabled",Toast.LENGTH_SHORT).show()
+                    val textView = findViewById<TextView>(R.id.bt_name)
+                    textView.text = resources.getString(R.string.no_bt_device_connected)
                 } else {
                     Toast.makeText(this@MainActivity, "BT was disabled",Toast.LENGTH_SHORT).show()
+                    val textView = findViewById<TextView>(R.id.bt_name)
+                    textView.text = resources.getString(R.string.bt_disabled)
                 }
             }else if(resultCode == Activity.RESULT_CANCELED){
                 Toast.makeText(this@MainActivity, "BT enabling has been canceled",Toast.LENGTH_SHORT).show()
+                val textView = findViewById<TextView>(R.id.bt_name)
+                textView.text = resources.getString(R.string.bt_disabled)
             }
         }
 
